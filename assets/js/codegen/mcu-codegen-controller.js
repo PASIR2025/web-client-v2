@@ -677,8 +677,8 @@
     const hint = document.getElementById('arduinoHint');
     const download = document.getElementById('arduinoDownload');
     const modeBox = document.getElementById('arduinoModeBox');
-    if (title) title.textContent = 'Generador ' + profile.name + ' (.ino)';
-    if (subtitle) subtitle.textContent = 'FBD o Ladder → código estable para ' + profile.name;
+    if (title) title.textContent = 'Programar microcontrolador';
+    if (subtitle) subtitle.textContent = 'Preparar, compilar y transferir · ' + profile.name;
     if (boardInfo) boardInfo.textContent = profile.note;
     if (hint) hint.innerHTML = '<b>Generador USB/OTG analógico:</b> genera I, AI, Q, PWM, AO, PID y SPLIT con protocolo Serial a 115200 baudios para Arduino y ESP32. Incluye HELLO, PING, GET_STATE, MODE, SET, SETA, RUN y STOP sin bloquear el ciclo PLC.';
     if (download) download.textContent = '⬇ Descargar ' + (profile.id === 'esp32' ? 'ESP32 ' : 'Arduino ') + '.ino';
@@ -738,9 +738,159 @@
     }
   }
 
+  // Windows: Web Serial necesita el selector COM fuera del modo fullscreen.
+  // No aplicar en Android, donde WebUSB/OTG ya funciona.
+  // Protección temporal: mientras el modal MCU esté abierto en Windows,
+  // ignorar solicitudes de fullscreen originadas por los controles globales.
+  // No intercepta clics ni modifica Web Serial / WebUSB.
+  let windowsArduinoModalActive = false;
+  let windowsHmiActive = false;
+  let restoreFullscreenAfterHmi = false;
+  let hmiConnectionDialog = null;
+  function visibleHmiConnectionDialog() {
+    if (!isWindowsArduinoPC()) return null;
+    const headings = document.querySelectorAll('h1,h2,h3,h4,[role="heading"]');
+    for (const heading of headings) {
+      if (!/Comunicación con Arduino\s*\/\s*ESP32/i.test(heading.textContent || '')) continue;
+      // El título puede estar en una cabecera: subir hasta el contenedor
+      // que también contiene el botón interno de conexión.
+      let dialog = heading;
+      for (let depth = 0; depth < 9 && dialog; depth++, dialog = dialog.parentElement) {
+        if (!dialog.getClientRects().length) continue;
+        const style = getComputedStyle(dialog);
+        if (style.display === 'none' || style.visibility === 'hidden') continue;
+        const buttons = Array.from(dialog.querySelectorAll('button'));
+        const hasConnect = buttons.some(function (button) {
+          return /conectar/i.test(button.textContent || '') && !/desconectar/i.test(button.textContent || '');
+        });
+        const hasDisconnect = buttons.some(function (button) { return /desconectar/i.test(button.textContent || ''); });
+        if (hasConnect && hasDisconnect) return dialog;
+      }
+    }
+    return null;
+  }
+  function monitorWindowsHmiFullscreen() {
+    if (!isWindowsArduinoPC()) return;
+    const dialog = visibleHmiConnectionDialog();
+    if (dialog && !windowsHmiActive) {
+      windowsHmiActive = true;
+      restoreFullscreenAfterHmi = !!document.fullscreenElement;
+    }
+    // No desactivar la protección por una detección fallida del modal.
+    // Solo el cierre explícito de la ventana debe desactivarla.
+    if (dialog) hmiConnectionDialog = dialog;
+    if (dialog) updateHmiFullscreenDiagnostic();
+    if (dialog && !dialog.__simuplcWindowsFullscreenEventsProtected) {
+      dialog.__simuplcWindowsFullscreenEventsProtected = true;
+      // Conservar los clics y handlers de los botones del modal,
+      // pero evitar que lleguen a los controles globales de pantalla completa.
+      ['pointerdown', 'mousedown', 'click', 'dblclick'].forEach(function (type) {
+        dialog.addEventListener(type, function (event) {
+          const button = event.target && event.target.closest && event.target.closest('button,[role="button"]');
+          if (button && /cerrar|close/i.test([button.getAttribute('aria-label'), button.getAttribute('title')].filter(Boolean).join(' '))) return;
+          event.stopPropagation();
+        });
+      });
+    }
+    if (dialog && document.fullscreenElement) {
+      document.exitFullscreen().catch(function () {});
+    }
+  }
+  function installHmiOpenGuard() {
+    document.addEventListener('click', function (event) {
+      if (!isWindowsArduinoPC()) return;
+      const button = event.target && event.target.closest && event.target.closest('#hmiIoConnectBtn');
+      if (!button) return;
+      // Activar la protección antes de que el controlador HMI abra el modal.
+      restoreFullscreenAfterHmi = !!document.fullscreenElement;
+      windowsHmiActive = true;
+      if (document.fullscreenElement) document.exitFullscreen().catch(function () {});
+    }, true);
+  }
+  function installHmiDialogCloseRestore() {
+    // Botón X real del modal HMI, identificado en DevTools: #hmiIoDialogClose.
+    // Ningún otro botón del modal cambia la protección fullscreen.
+    document.addEventListener('click', function (event) {
+      if (!isWindowsArduinoPC() || !windowsHmiActive) return;
+      const closeButton = event.target && event.target.closest && event.target.closest('#hmiIoDialogClose');
+      if (!closeButton) return;
+      const restore = restoreFullscreenAfterHmi;
+      windowsHmiActive = false;
+      restoreFullscreenAfterHmi = false;
+      hmiConnectionDialog = null;
+      if (restore && !document.fullscreenElement && typeof document.documentElement.requestFullscreen === 'function') {
+        document.documentElement.requestFullscreen().catch(function (error) {
+          console.warn('[SimuPLC] No se pudo restaurar pantalla completa al cerrar HMI:', error);
+        });
+      }
+    }, true);
+  }
+  let hmiFullscreenBlockedRequests = 0;
+  function updateHmiFullscreenDiagnostic() {
+    if (!isWindowsArduinoPC()) return;
+    const dialog = visibleHmiConnectionDialog();
+    if (!dialog) return;
+    let label = dialog.querySelector('#simuplcHmiFullscreenDiagnostic');
+    if (!label) {
+      label = document.createElement('div');
+      label.id = 'simuplcHmiFullscreenDiagnostic';
+      label.style.cssText = 'font:12px Arial;padding:5px 9px;background:#fff3cd;color:#4a3500;border:1px solid #e3c46c;border-radius:6px;margin:6px 0;position:relative;z-index:2';
+      const title = Array.from(dialog.querySelectorAll('h1,h2,h3,h4,[role="heading"]')).find(function (h) { return /Comunicación con Arduino/i.test(h.textContent || ''); });
+      if (title && title.parentElement) title.parentElement.appendChild(label);
+      else dialog.prepend(label);
+    }
+    label.textContent = 'Diagnóstico PC: modal detectado · protección ' + (windowsHmiActive ? 'ACTIVA' : 'INACTIVA') + ' · pantalla completa ' + (document.fullscreenElement ? 'SÍ' : 'NO') + ' · solicitudes bloqueadas ' + hmiFullscreenBlockedRequests;
+  }
+  const originalRequestFullscreen = Element.prototype.requestFullscreen;
+  if (typeof originalRequestFullscreen === 'function') {
+    Element.prototype.requestFullscreen = function () {
+      if (isWindowsArduinoPC() && (windowsArduinoModalActive || windowsHmiActive || visibleHmiConnectionDialog())) {
+        if (visibleHmiConnectionDialog()) { hmiFullscreenBlockedRequests++; updateHmiFullscreenDiagnostic(); }
+        return Promise.resolve();
+      }
+      return originalRequestFullscreen.apply(this, arguments);
+    };
+  }
+  document.addEventListener('fullscreenchange', function () {
+    if (isWindowsArduinoPC() && (windowsArduinoModalActive || windowsHmiActive || visibleHmiConnectionDialog()) && document.fullscreenElement) {
+      document.exitFullscreen().catch(function () {});
+    }
+  });
+  let restoreFullscreenAfterArduino = false;
+  function isWindowsArduinoPC() {
+    return /Windows/i.test(navigator.userAgent || '') && !!navigator.serial;
+  }
   function openModalStable() {
+    if (isWindowsArduinoPC()) {
+      windowsArduinoModalActive = true;
+      restoreFullscreenAfterArduino = !!document.fullscreenElement;
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(function (err) {
+          console.warn('[SimuPLC] No se pudo salir de fullscreen para Arduino:', err);
+        });
+      }
+    }
     if (typeof global.openArduinoModal === 'function') global.openArduinoModal();
     setTimeout(function () { refreshAll(false); }, 60);
+  }
+  // La restauración se intenta solo con el clic real del usuario al cerrar.
+  function installArduinoFullscreenClose() {
+    global.addEventListener('click', function (event) {
+      if (!isWindowsArduinoPC()) return;
+      const close = event.target && event.target.closest && event.target.closest('#arduinoClose');
+      if (!close) return;
+      windowsArduinoModalActive = false;
+      if (!restoreFullscreenAfterArduino) return;
+      restoreFullscreenAfterArduino = false;
+      // Chrome puede rechazar fullscreen cuando el gesto de usuario ya fue consumido.
+      // No impedir que el modal cierre en ese caso.
+      try {
+        const root = document.documentElement;
+        if (!document.fullscreenElement && root.requestFullscreen) {
+          root.requestFullscreen().catch(function () {});
+        }
+      } catch (_) {}
+    }, { capture: true });
   }
 
   function installCaptureHandlers() {
@@ -828,8 +978,26 @@
     getDiagnostics: function () { return clone(diagnostics); }
   });
 
+  function loadUnoProgrammer() {
+    if (global.SimuPLCArduinoUNO || document.querySelector('script[data-simuplc-uno-loader]')) return;
+    const script = document.createElement('script');
+    script.src = 'assets/js/arduino-uno-programmer-v1.js?v=pc-uno-release-1';
+    script.defer = true;
+    script.dataset.simuplcUnoLoader = '1';
+    script.onerror = function () { console.error('[SimuPLC] No se pudo cargar el programador Arduino UNO'); };
+    document.head.appendChild(script);
+  }
+
   function init() {
+    loadUnoProgrammer();
     installCaptureHandlers();
+    installArduinoFullscreenClose();
+    installHmiOpenGuard();
+    installHmiDialogCloseRestore();
+    if (isWindowsArduinoPC()) {
+      setInterval(monitorWindowsHmiFullscreen, 200);
+      monitorWindowsHmiFullscreen();
+    }
     observeModal();
     ensureBoardOptions();
   }
