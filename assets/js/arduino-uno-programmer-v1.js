@@ -11,7 +11,7 @@ function toast(msg,err){
   // Mostrar solo al iniciar una operación, no al abrir el modal ni al elegir puerto.
   if(/Compilando|compilando|Sincronizando|Conectando y programando|Selecciona el Arduino UNO conectado|Programando Arduino UNO/.test(String(msg)))panel.hidden=false;
   const title=panel.querySelector('[data-uno-title]'),bar=panel.querySelector('[data-uno-fill]'),pct=panel.querySelector('[data-uno-percent]');
-  const m=String(msg),upload=/Programando Arduino UNO…\\s*(\\d+)%/.exec(m);
+  const m=String(msg),upload=/Programando Arduino UNO…\s*(\d+)%/.exec(m);
   const compiled=/Compilación correcta|compilado correctamente/.test(m),finished=/programado correctamente/.test(m);
   const compiling=/Compilando|compilando/.test(m),syncing=/Sincronizando|Conectando y programando|Selecciona el Arduino UNO conectado/.test(m);
   if(title)title.textContent=err?'Error del programador':finished?'Programación completada':upload?'Programando Arduino':compiled?'Compilación correcta':compiling?'Compilando código':syncing?'Conectando Arduino':'Estado del programador';
