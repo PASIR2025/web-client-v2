@@ -1,10 +1,11 @@
 /* SimuPLC V16 - Service Worker offline-first. */
-const CACHE_NAME = 'simuplc-web-v26-pc-iphone-1';
+const CACHE_NAME = 'simuplc-web-v27-arduino-uno-pc';
 const APP_SHELL = [
   "./",
   "./index.html",
   "./arduino512.jpg",
   "./assets/css/app.css",
+  "./assets/js/arduino-uno-programmer-v1.js",
   "./assets/js/codegen/esp32-codegen.js",
   "./assets/js/codegen/mcu-codegen-controller.js",
   "./assets/js/codegen/variable-manager.js",
@@ -137,5 +138,6 @@ self.addEventListener('fetch', (event) => {
   }
 
   const isNavigation = request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
-  event.respondWith(isNavigation ? networkFirst(request, url) : cacheFirst(request, url));
+  const programmerScript = /\/assets\/js\/(?:arduino-uno-programmer-v1\.js|codegen\/mcu-codegen-controller\.js)$/.test(url.pathname);
+  event.respondWith((isNavigation || programmerScript) ? networkFirst(request, url) : cacheFirst(request, url));
 });
