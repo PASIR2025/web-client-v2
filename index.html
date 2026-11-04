@@ -3539,6 +3539,36 @@ body.mode-control #editorSelectBtn{display:none!important}
 }
 </style>
 
+<style id="simuplc-pro-multiplatform-modal-2026">
+#lockOverlayCard{width:min(94vw,440px)!important;max-width:440px!important;max-height:calc(100dvh - 24px)!important;padding:18px!important;border:1px solid #2e4264!important;border-radius:20px!important;background:#0b1427!important;overflow-y:auto!important;box-shadow:0 25px 70px #0009!important;text-align:left!important}
+#lockOverlayCard>div:first-child h3{font-size:clamp(1.1rem,3.5vw,1.35rem)!important;line-height:1.2!important;color:#f8fbff!important}
+.simuplc-pro-license-banner{display:flex;flex-direction:column;gap:5px;margin:14px 0 8px;padding:12px 14px;border-radius:13px;background:#182d4b;border:1px solid #345a89;color:#fff}
+.simuplc-pro-license-banner strong{font-size:.91rem;letter-spacing:.01em}
+.simuplc-pro-license-banner span{font-size:.78rem;color:#d2e4fa;line-height:1.4}
+#lockOverlayCard .simuplc-pro-summary{font-size:.82rem!important;line-height:1.45!important;margin:8px 0!important;color:#d8e5f7!important}
+.simuplc-pro-features{margin:8px 0!important;border:1px solid #34465f;border-radius:10px;background:#0a1222}
+.simuplc-pro-features summary{cursor:pointer;padding:10px 12px;color:#b7dcff;font-weight:800;font-size:.81rem;list-style-position:inside}
+.simuplc-pro-features .pro-benefits{margin:0 8px 8px!important;padding:10px!important}
+.simuplc-pro-features .pro-benefits-list{gap:5px!important}
+.simuplc-pro-features .pro-benefits-list li{font-size:.76rem!important}
+#lockOverlayCard .simuplc-pro-intro{font-size:.8rem!important;margin:10px 0 5px!important;color:#dbeafe!important;text-align:center}
+#lockOverlayCard .simuplc-direct-country{margin:0!important;padding:0!important;min-height:0!important}
+#lockOverlayCard .simuplc-web-benefit{margin:6px 0 9px!important;font-size:.78rem!important;color:#bed7f7!important}
+#lockOverlayCard .simuplc-direct-plans{margin:8px 0!important;gap:9px!important}
+#lockOverlayCard .simuplc-direct-buy{min-height:70px!important;padding:10px 13px!important;border-radius:13px!important;background:#172b49!important;border:1px solid #42618b!important;box-shadow:none!important;gap:8px!important}
+#lockOverlayCard .simuplc-direct-buy.simuplc-pro-featured{background:linear-gradient(110deg,#174c91,#1864b4)!important;border-color:#67b5ff!important}
+#lockOverlayCard .simuplc-direct-buy>span{font-size:.88rem!important;color:#fff!important;line-height:1.25!important}
+#lockOverlayCard .simuplc-direct-buy>span em{display:block;font-size:.67rem;font-style:normal;color:#b5e9ff;margin-top:4px}
+#lockOverlayCard .simuplc-direct-buy small{align-items:flex-end!important;max-width:57%!important;text-align:right!important}
+#lockOverlayCard .price-before{font-size:.66rem!important}
+#lockOverlayCard .price-now{font-size:.88rem!important;line-height:1.3!important}
+#lockOverlayCard .simuplc-pro-google-note{margin:9px 0!important;font-size:.72rem!important;color:#b8cce8!important;line-height:1.4!important;text-align:center}
+#lockOverlayCard .simuplc-pro-whatsapp{display:flex;align-items:center;justify-content:center;width:100%;min-height:43px;margin:10px 0!important;border-radius:11px;background:#1cb95e;color:#fff!important;text-decoration:none!important;font-weight:850;font-size:.87rem}
+#lockOverlayCard .simuplc-pro-whatsapp:hover{background:#159a4e}
+#lockOverlayCard .license-actions{margin:8px 0!important}
+#lockOverlayCard .btn-have-license{min-height:40px!important}
+@media(max-width:420px){#lockOverlayCard{padding:13px!important}#lockOverlayCard .simuplc-direct-buy{padding:9px!important}#lockOverlayCard .simuplc-direct-buy>span{font-size:.8rem!important}#lockOverlayCard .price-now{font-size:.79rem!important}}
+</style>
 </head>
 <body>
 <div id="simuplcBootScreen" aria-label="Cargando SimuPLC">
@@ -3615,6 +3645,9 @@ body.mode-control #editorSelectBtn{display:none!important}
       <h3 style="margin:0">🔓 Desbloquea SimuPLC PRO</h3>
       <button id="lockClose" aria-label="Cerrar" style="border:none;background:transparent;color:#cbd5f5;font-size:18px;font-weight:900;cursor:pointer;line-height:1">✕</button>
     </div>
+    <div class="simuplc-pro-license-banner"><strong>💻 📱 Licencia PRO MULTIPLATAFORMA</strong><span>PC + Android · Hasta 3 dispositivos · Compra directa en Escuela PASIR</span></div>
+    <p class="simuplc-pro-summary">Desbloquea Ladder, FBD, HMI avanzado, temporizadores, exportación PDF y más.</p>
+    <details class="simuplc-pro-features"><summary>✓ Ver todas las funciones PRO</summary>
     <div class="pro-benefits" aria-label="Beneficios de SimuPLC PRO">
       <ul class="pro-benefits-list">
         <li>Entradas y salidas analógicas</li>
@@ -3630,25 +3663,27 @@ body.mode-control #editorSelectBtn{display:none!important}
         <li><strong>Nuevas funciones y actualizaciones PRO incluidas</strong></li>
       </ul>
     </div>
-    <p>Elige tu licencia PRO o activa tu código si ya realizaste la compra.</p>
+    </details>
+    <p class="simuplc-pro-intro">Elige tu plan multiplataforma o activa tu código si ya compraste.</p>
 
     <div class="simuplc-direct-country">
       <strong id="simuplcDetectedCountry">Detectando tu país y moneda…</strong>
     </div>
     <div class="simuplc-web-benefit">
-      <strong>Licencia para 3 dispositivos</strong> · Celular, PC o laptop
+      <strong>Compra directa: PC + Android</strong> · Hasta 3 dispositivos
     </div>
     <div class="simuplc-direct-plans">
-      <button id="btnDirectAnnual" class="btn-lock simuplc-direct-buy" type="button">
-        <span>PRO Anual</span>
-        <small id="priceDirectAnnual">Detectando precio…</small>
+      <button id="btnDirectLifetime" class="btn-lock simuplc-direct-buy simuplc-pro-featured" type="button">
+        <span>⭐ PRO de por vida <em>Recomendado</em></span>
+        <small id="priceDirectLifetime">S/79 · US$29 · Pago único</small>
       </button>
-
-      <button id="btnDirectLifetime" class="btn-lock simuplc-direct-buy" type="button">
-        <span>PRO de por vida</span>
-        <small id="priceDirectLifetime">Detectando precio…</small>
+      <button id="btnDirectAnnual" class="btn-lock simuplc-direct-buy" type="button">
+        <span>PRO anual · 12 meses</span>
+        <small id="priceDirectAnnual">S/39 · US$17 / año</small>
       </button>
     </div>
+    <p class="simuplc-pro-google-note">La compra directa incluye PC + Android. Las compras dentro de Google Play son solo para Android.</p>
+    <a class="simuplc-pro-whatsapp" href="https://wa.me/51926299585?text=Hola%2C%20Escuela%20PASIR.%20Estoy%20interesado%20en%20SimuPLC%20PRO%20Multiplataforma%20para%20PC%20y%20Android.%20Quisiera%20consultar%20sobre%20los%20planes%20y%20la%20activaci%C3%B3n." target="_blank" rel="noopener noreferrer">💬 Consultar por WhatsApp</a>
 
     <div class="license-actions">
       <button id="btnHaveLicense" class="btn-lock btn-have-license" type="button">Ya tengo licencia</button>
@@ -17216,7 +17251,7 @@ body.mode-fbd #wires .wire-hit{
 
   const CHECKOUT_URL = "https://escuelapasir.com/pasarela.html";
   const PLANS = {
-    annual:   { name:"Licencia anual", pen:49, usd:20, normalPen:69, normalUsd:25 },
+    annual:   { name:"Licencia anual", pen:39, usd:17, normalPen:69, normalUsd:25 },
     lifetime: { name:"Licencia de por vida", pen:79, usd:29, normalPen:99, normalUsd:35 }
   };
 
@@ -17311,7 +17346,7 @@ body.mode-fbd #wires .wire-hit{
     const p=PLANS[plan], d=displayFor(plan);
     const q=new URLSearchParams();
     q.set("product","SimuPLC PRO");
-    q.set("desc","Licencia SimuPLC PRO para hasta 3 dispositivos compatibles: celular, PC o laptop.");
+    q.set("desc","SimuPLC PRO Multiplataforma (PC + Android), hasta 3 dispositivos.");
     q.set("category","Apps");
     q.set("plan",p.name);
     q.set("currency",d.curr);
