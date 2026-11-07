@@ -3569,6 +3569,35 @@ body.mode-control #editorSelectBtn{display:none!important}
 #lockOverlayCard .btn-have-license{min-height:40px!important}
 @media(max-width:420px){#lockOverlayCard{padding:13px!important}#lockOverlayCard .simuplc-direct-buy{padding:9px!important}#lockOverlayCard .simuplc-direct-buy>span{font-size:.8rem!important}#lockOverlayCard .price-now{font-size:.79rem!important}}
 </style>
+<style id="simuplc-pc-modal-refined-2026">
+#lockOverlayCard{width:min(94vw,540px)!important;max-width:540px!important;padding:22px!important;background:#09162d!important;border:1px solid #2c5c9c!important;border-radius:22px!important}
+#lockOverlayCard>div:first-child h3{font-size:clamp(1.18rem,3vw,1.55rem)!important}
+#lockOverlayCard .simuplc-pro-license-banner{background:#152f53!important;border:1px solid #3769a5!important;padding:14px!important;margin:15px 0 12px!important}
+#lockOverlayCard .simuplc-pro-license-banner strong{font-size:1rem!important}
+#lockOverlayCard .simuplc-pro-license-banner span{font-size:.84rem!important}
+#lockOverlayCard .simuplc-platform-warning{color:#ffdf9a!important;border-top:1px solid #365474;padding-top:9px;margin-top:4px}
+#lockOverlayCard .simuplc-pro-features{display:none!important}
+#lockOverlayCard .simuplc-features-open{display:flex;width:100%;align-items:center;justify-content:center;gap:12px;background:linear-gradient(110deg,#0754b4,#168bff);border:1px solid #6dc9ff;border-radius:12px;color:white;font-size:1rem;font-weight:850;padding:13px;cursor:pointer;box-shadow:0 5px 18px #007aff33}
+#lockOverlayCard .simuplc-features-open span{font-size:1.55rem;line-height:1}
+#lockOverlayCard .simuplc-features-open:hover{filter:brightness(1.12)}
+#lockOverlayCard .simuplc-pro-intro{font-size:1rem!important;font-weight:850!important;margin:16px 0 12px!important}
+#lockOverlayCard .simuplc-direct-plans{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+#lockOverlayCard .simuplc-direct-buy{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:10px!important;min-height:170px!important;padding:18px 14px!important;text-align:left!important;border-radius:16px!important;transition:filter .15s ease!important}
+#lockOverlayCard .simuplc-direct-buy.simuplc-pro-featured{background:linear-gradient(145deg,#123c79,#1564b5)!important;border:2px solid #68bdff!important;box-shadow:0 6px 22px #1b85ff25!important}
+#lockOverlayCard .simuplc-direct-buy:not(.simuplc-pro-featured){background:#172b49!important;border:1px solid #496e9f!important}
+#lockOverlayCard .simuplc-direct-buy>span{font-size:1rem!important;line-height:1.35!important}
+#lockOverlayCard .simuplc-direct-buy>span em{font-size:.74rem!important;color:#cfe5ff!important;font-weight:550!important;margin-top:5px}
+#lockOverlayCard .simuplc-direct-buy small{max-width:none!important;align-items:flex-start!important;text-align:left!important;margin-top:auto!important;gap:4px!important;width:100%}
+#lockOverlayCard .simuplc-direct-buy .price-now{font-size:clamp(1.55rem,4vw,2rem)!important;font-weight:950!important;line-height:1.1!important;white-space:nowrap!important}
+#lockOverlayCard .simuplc-direct-buy .price-term{font-size:.78rem!important;font-weight:650!important;color:#d8eaff!important}
+#lockOverlayCard .simuplc-pro-whatsapp{min-height:48px!important;font-size:1rem!important;margin-top:16px!important}
+#simuplcProFeaturesDialog{border:1px solid #4e8cd5;border-radius:18px;padding:22px;background:#0b1a34;color:#f2f7ff;width:min(92vw,540px);max-height:80dvh;overflow:auto;box-shadow:0 30px 80px #000b}
+#simuplcProFeaturesDialog::backdrop{background:#020817bb}
+#simuplcProFeaturesDialog h3{margin:0 0 14px;font-size:1.25rem}
+#simuplcProFeaturesDialog .pro-benefits-list{padding-left:20px;line-height:1.7}
+#simuplcProFeaturesDialog .simuplc-features-close{float:right;border:1px solid #6784a7;background:#172e50;color:white;border-radius:8px;padding:6px 11px;cursor:pointer}
+@media(max-width:500px){#lockOverlayCard{padding:15px!important}#lockOverlayCard .simuplc-direct-plans{grid-template-columns:1fr!important}#lockOverlayCard .simuplc-direct-buy{min-height:115px!important}#lockOverlayCard .simuplc-direct-buy .price-now{font-size:1.6rem!important}}
+</style>
 </head>
 <body>
 <div id="simuplcBootScreen" aria-label="Cargando SimuPLC">
@@ -3645,9 +3674,9 @@ body.mode-control #editorSelectBtn{display:none!important}
       <h3 style="margin:0">🔓 Desbloquea SimuPLC PRO</h3>
       <button id="lockClose" aria-label="Cerrar" style="border:none;background:transparent;color:#cbd5f5;font-size:18px;font-weight:900;cursor:pointer;line-height:1">✕</button>
     </div>
-    <div class="simuplc-pro-license-banner"><strong>💻 📱 Licencia PRO MULTIPLATAFORMA</strong><span>PC + Android · Hasta 3 dispositivos · Compra directa en Escuela PASIR</span></div>
-    <p class="simuplc-pro-summary">Desbloquea Ladder, FBD, HMI avanzado, temporizadores, exportación PDF y más.</p>
-    <details class="simuplc-pro-features"><summary>✓ Ver todas las funciones PRO</summary>
+    <div class="simuplc-pro-license-banner"><strong>💻 📱 Licencia PRO MULTIPLATAFORMA</strong><span>PC + Android · Hasta 3 dispositivos · Compra directa con Escuela PASIR</span><span class="simuplc-platform-warning">⚠️ Las compras realizadas en Google Play son únicamente para Android.</span></div>
+    
+    <button class="simuplc-features-open" id="simuplcFeaturesOpen" type="button">✦ Ver todas las funciones PRO <span aria-hidden="true">›</span></button><details class="simuplc-pro-features" hidden><summary>✓ Ver todas las funciones PRO</summary>
     <div class="pro-benefits" aria-label="Beneficios de SimuPLC PRO">
       <ul class="pro-benefits-list">
         <li>Entradas y salidas analógicas</li>
@@ -3664,26 +3693,21 @@ body.mode-control #editorSelectBtn{display:none!important}
       </ul>
     </div>
     </details>
-    <p class="simuplc-pro-intro">Elige tu plan multiplataforma o activa tu código si ya compraste.</p>
+    <p class="simuplc-pro-intro">Elige la mejor opción para ti</p>
 
     <div class="simuplc-direct-country">
       <strong id="simuplcDetectedCountry">Detectando tu país y moneda…</strong>
     </div>
-    <div class="simuplc-web-benefit">
-      <strong>Compra directa: PC + Android</strong> · Hasta 3 dispositivos
-    </div>
     <div class="simuplc-direct-plans">
       <button id="btnDirectLifetime" class="btn-lock simuplc-direct-buy simuplc-pro-featured" type="button">
-        <span>⭐ PRO de por vida <em>Recomendado</em></span>
+        <span>⭐ PRO de por vida <em>Pago único · Acceso permanente</em></span>
         <small id="priceDirectLifetime">S/79 · US$29 · Pago único</small>
       </button>
       <button id="btnDirectAnnual" class="btn-lock simuplc-direct-buy" type="button">
-        <span>PRO anual · 12 meses</span>
+        <span>📅 PRO anual <em>12 meses de acceso</em></span>
         <small id="priceDirectAnnual">S/39 · US$17 / año</small>
       </button>
     </div>
-    <p id="simuplcPromoCountdown" aria-live="off" hidden style="text-align:center;color:#ffe59a;font-weight:800;font-size:.8rem;margin:8px 0"></p>
-    <p class="simuplc-pro-google-note">La compra directa incluye PC + Android. Las compras dentro de Google Play son solo para Android.</p>
     <a class="simuplc-pro-whatsapp" href="https://wa.me/51926299585?text=Hola%2C%20Escuela%20PASIR.%20Estoy%20interesado%20en%20SimuPLC%20PRO%20Multiplataforma%20para%20PC%20y%20Android.%20Quisiera%20consultar%20sobre%20los%20planes%20y%20la%20activaci%C3%B3n." target="_blank" rel="noopener noreferrer">💬 Consultar por WhatsApp</a>
 
     <div class="license-actions">
@@ -17252,21 +17276,12 @@ body.mode-fbd #wires .wire-hit{
 
   const CHECKOUT_URL = "https://escuelapasir.com/pasarela.html";
   const PLANS = {
-    annual:   { name:"Licencia anual", pen:39, usd:17, normalPen:69, normalUsd:25 },
+    annual:   { name:"Licencia anual", pen:39, usd:17, normalPen:39, normalUsd:17 },
     lifetime: { name:"Licencia de por vida", pen:79, usd:29, normalPen:79, normalUsd:29 }
   };
 
-  // Campaña fija: 6–12 noviembre 2026, horario de Perú (UTC-5).
-  // Los precios regresan automáticamente a su valor habitual el 13/11.
-  const PROMO_START = Date.parse("2026-11-06T00:00:00-05:00");
-  const PROMO_END = Date.parse("2026-11-13T00:00:00-05:00");
-  const promoActive = () => Date.now() >= PROMO_START && Date.now() < PROMO_END;
-  function effectivePlan(plan){
-    const p = PLANS[plan];
-    return plan === "lifetime" && promoActive()
-      ? {...p, pen:63.20, usd:23.20}
-      : p;
-  }
+  // Precios habituales: sin campaña ni descuentos activos.
+  function effectivePlan(plan){ return PLANS[plan]; }
 
   const regionToCurrency = {
     PE:"PEN",US:"USD",CA:"CAD",MX:"MXN",GT:"GTQ",HN:"HNL",NI:"NIO",CR:"CRC",PA:"PAB",DO:"DOP",
@@ -17348,23 +17363,10 @@ body.mode-fbd #wires .wire-hit{
   }
 
   function updatePrices(){
-    const a=displayFor("annual"), l=displayFor("lifetime");
     const annual=document.getElementById("priceDirectAnnual");
     const lifetime=document.getElementById("priceDirectLifetime");
-    if(annual) annual.innerHTML=`<span class="price-before">Antes: ${a.normal}</span><span class="price-now">Ahora: ${a.text} / año</span>`;
-    if(lifetime) lifetime.innerHTML=promoActive()
-      ? `<span class="price-before">Antes: ${l.normal}</span><span class="price-now">20% OFF · ${l.text} pago único</span>`
-      : `<span class="price-now">${l.text} pago único</span>`;
-    const timer=document.getElementById("simuplcPromoCountdown");
-    if(timer){
-      const remaining=Math.max(0,PROMO_END-Date.now());
-      timer.hidden=!promoActive();
-      if(remaining>0 && promoActive()){
-        const s=Math.floor(remaining/1000);
-        const days=Math.floor(s/86400), hours=Math.floor(s%86400/3600), mins=Math.floor(s%3600/60), secs=s%60;
-        timer.textContent=`⏳ Oferta de por vida termina en ${days}d ${String(hours).padStart(2,"0")}h ${String(mins).padStart(2,"0")}m ${String(secs).padStart(2,"0")}s`;
-      }
-    }
+    if(annual) annual.innerHTML='<span class="price-now">'+displayFor("annual").text+'</span><span class="price-term">por año</span>';
+    if(lifetime) lifetime.innerHTML='<span class="price-now">'+displayFor("lifetime").text+'</span><span class="price-term">pago único</span>';
   }
 
   function checkout(plan){
@@ -17400,6 +17402,22 @@ body.mode-fbd #wires .wire-hit{
 })();
 </script>
 
+<script id="simuplc-pc-features-dialog-2026">
+document.addEventListener("DOMContentLoaded",function(){
+  const trigger=document.getElementById("simuplcFeaturesOpen");
+  const source=document.querySelector("#lockOverlayCard .simuplc-pro-features .pro-benefits");
+  if(!trigger||!source)return;
+  const dialog=document.createElement("dialog");
+  dialog.id="simuplcProFeaturesDialog";
+  dialog.setAttribute("aria-label","Todas las funciones SimuPLC PRO");
+  dialog.innerHTML='<button type="button" class="simuplc-features-close" aria-label="Cerrar funciones">✕ Cerrar</button><h3>Funciones incluidas en SimuPLC PRO</h3>';
+  dialog.appendChild(source.cloneNode(true));
+  document.body.appendChild(dialog);
+  trigger.addEventListener("click",function(){if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");});
+  dialog.querySelector(".simuplc-features-close").addEventListener("click",function(){if(typeof dialog.close==="function")dialog.close();else dialog.removeAttribute("open");});
+  dialog.addEventListener("click",function(e){if(e.target===dialog)dialog.close();});
+});
+</script>
 </body></html>');
   doc.close();
 
