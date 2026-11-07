@@ -3634,6 +3634,13 @@ body.mode-control #editorSelectBtn{display:none!important}
 }
 @media(max-width:340px){#lockOverlayCard .simuplc-direct-plans{grid-template-columns:1fr!important}#lockOverlayCard .simuplc-direct-buy{min-height:94px!important}}
 </style>
+<style id="simuplc-pro-bonus-2026">
+#simuplcProFeaturesDialog .simuplc-feature-bonus{background:linear-gradient(115deg,#194675,#163454);border:1px solid #edc36b;border-radius:14px;padding:16px;margin:0 0 14px;box-shadow:0 4px 16px #0002}
+#simuplcProFeaturesDialog .simuplc-bonus-label{font-size:.76rem;letter-spacing:.05em;color:#ffdc8b;font-weight:900;margin-bottom:8px}
+#simuplcProFeaturesDialog .simuplc-feature-bonus strong{display:block;font-size:1.1rem;color:#fff;line-height:1.4}
+#simuplcProFeaturesDialog .simuplc-feature-bonus p{font-size:.81rem;color:#cfe0f5;line-height:1.45;margin:7px 0 0}
+@media(max-width:600px){#simuplcProFeaturesDialog .simuplc-feature-bonus{padding:12px;margin-bottom:10px}#simuplcProFeaturesDialog .simuplc-feature-bonus strong{font-size:.98rem}}
+</style>
 </head>
 <body>
 <div id="simuplcBootScreen" aria-label="Cargando SimuPLC">
@@ -17447,10 +17454,14 @@ document.addEventListener("DOMContentLoaded",function(){
   dialog.id="simuplcProFeaturesDialog";
   dialog.setAttribute("aria-label","Todas las funciones SimuPLC PRO");
   dialog.innerHTML='<button type="button" class="simuplc-features-close" aria-label="Cerrar funciones">✕ Cerrar</button><h3>Todo lo que incluye SimuPLC PRO</h3><p class="simuplc-features-subtitle">Herramientas para diseñar, programar, simular y documentar tus proyectos eléctricos y de automatización.</p>';
+  const bonus=document.createElement("section");
+  bonus.className="simuplc-feature-bonus";
+  bonus.innerHTML='<div class="simuplc-bonus-label">🎁 BONO INCLUIDO CON TU LICENCIA PRO</div><strong>PDF de esquemas eléctricos de regalo</strong><p>Material técnico adicional que recibirás con tu compra. Es independiente de la función de exportación de circuitos.</p>';
+  dialog.appendChild(bonus);
   const sections=[
-    {title:"Programación PLC y Arduino",icon:"🧩",items:["Programación y simulación avanzada en Ladder y FBD","Módulos de ampliación LOGO!","Entradas y salidas analógicas","Temporizadores configurables","Programación de Arduino con funciones avanzadas PRO, como temporizadores (Arduino básico también disponible en FREE)"]},
+    {title:"Programación PLC y Arduino",icon:"🧩",items:["Programación y simulación avanzada en Ladder y FBD","Módulos de ampliación LOGO!","Entradas y salidas analógicas","Temporizadores configurables","Programación de Arduino con funciones avanzadas PRO, como temporizadores"]},
     {title:"Control y potencia",icon:"⚡",items:["Variadores de frecuencia (VFD)","Modo Técnico y Protecciones","Banco de condensadores y mejora del factor de potencia","Transformadores de alta a baja tensión"]},
-    {title:"HMI y proyectos",icon:"🖥️",items:["Procesos HMI avanzados sin las limitaciones de FREE","Guardar y exportar el proyecto completo","PDF de esquemas eléctricos con cajetín editable y sin marca"]},
+    {title:"HMI y proyectos",icon:"🖥️",items:["Procesos HMI avanzados sin las limitaciones de FREE","Guardar y exportar el proyecto completo","Exportar circuitos a PDF con cajetín editable y sin marca"]},
     {title:"Actualizaciones",icon:"✨",items:["Nuevas funciones y actualizaciones PRO incluidas"]}
   ];
   const content=document.createElement("div");
