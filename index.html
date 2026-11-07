@@ -3598,6 +3598,42 @@ body.mode-control #editorSelectBtn{display:none!important}
 #simuplcProFeaturesDialog .simuplc-features-close{float:right;border:1px solid #6784a7;background:#172e50;color:white;border-radius:8px;padding:6px 11px;cursor:pointer}
 @media(max-width:500px){#lockOverlayCard{padding:15px!important}#lockOverlayCard .simuplc-direct-plans{grid-template-columns:1fr!important}#lockOverlayCard .simuplc-direct-buy{min-height:115px!important}#lockOverlayCard .simuplc-direct-buy .price-now{font-size:1.6rem!important}}
 </style>
+<style id="simuplc-pc-mobile-and-features-2026">
+#simuplcProFeaturesDialog{width:min(94vw,650px)!important;max-height:min(84dvh,760px)!important;padding:22px!important;box-sizing:border-box!important}
+#simuplcProFeaturesDialog h3{font-size:1.32rem!important;line-height:1.3!important;padding-right:72px!important;margin-bottom:7px!important}
+#simuplcProFeaturesDialog .simuplc-features-subtitle{color:#c5dcfa;font-size:.91rem;line-height:1.5;margin:0 0 16px}
+#simuplcProFeaturesDialog .simuplc-features-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#simuplcProFeaturesDialog .simuplc-feature-section{padding:15px;background:#172e50;border:1px solid #3d6594;border-radius:13px}
+#simuplcProFeaturesDialog .simuplc-feature-section h4{color:#fff;font-size:1rem;margin:0 0 10px}
+#simuplcProFeaturesDialog .simuplc-feature-section ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+#simuplcProFeaturesDialog .simuplc-feature-section li{position:relative;padding-left:21px;color:#e3edfc;font-size:.85rem;line-height:1.45}
+#simuplcProFeaturesDialog .simuplc-feature-section li:before{content:"✓";position:absolute;left:0;top:0;color:#67e6af;font-weight:900}
+#simuplcProFeaturesDialog .simuplc-features-footer{font-size:.78rem;color:#a9c6e8;text-align:center;margin:15px 0 0}
+@media(max-width:600px){
+ #lockOverlayCard{width:min(94vw,420px)!important;max-width:420px!important;padding:13px!important;border-radius:16px!important;max-height:calc(100dvh - 20px)!important}
+ #lockOverlayCard>div:first-child h3{font-size:1.13rem!important}
+ #lockOverlayCard .simuplc-pro-license-banner{margin:10px 0!important;padding:10px 11px!important;gap:3px!important}
+ #lockOverlayCard .simuplc-pro-license-banner strong{font-size:.82rem!important}
+ #lockOverlayCard .simuplc-pro-license-banner span{font-size:.74rem!important;line-height:1.35!important}
+ #lockOverlayCard .simuplc-platform-warning{padding-top:6px!important}
+ #lockOverlayCard .simuplc-features-open{font-size:.85rem!important;padding:10px!important}
+ #lockOverlayCard .simuplc-pro-intro{font-size:.87rem!important;margin:10px 0 7px!important}
+ #lockOverlayCard .simuplc-direct-plans{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:7px 0!important}
+ #lockOverlayCard .simuplc-direct-buy{min-height:125px!important;padding:11px 9px!important;gap:5px!important;border-radius:12px!important}
+ #lockOverlayCard .simuplc-direct-buy>span{font-size:.78rem!important;line-height:1.3!important}
+ #lockOverlayCard .simuplc-direct-buy>span em{font-size:.66rem!important}
+ #lockOverlayCard .simuplc-direct-buy .price-now{font-size:1.43rem!important}
+ #lockOverlayCard .simuplc-direct-buy .price-term{font-size:.68rem!important}
+ #lockOverlayCard .simuplc-pro-whatsapp{min-height:42px!important;margin:9px 0!important;font-size:.84rem!important}
+ #lockOverlayCard .license-actions{margin:6px 0!important}
+ #lockOverlayCard .btn-have-license{min-height:36px!important}
+ #simuplcProFeaturesDialog{width:94vw!important;padding:15px!important;max-height:85dvh!important}
+ #simuplcProFeaturesDialog .simuplc-features-grid{grid-template-columns:1fr!important;gap:9px!important}
+ #simuplcProFeaturesDialog .simuplc-feature-section{padding:12px!important}
+ #simuplcProFeaturesDialog h3{font-size:1.13rem!important}
+}
+@media(max-width:340px){#lockOverlayCard .simuplc-direct-plans{grid-template-columns:1fr!important}#lockOverlayCard .simuplc-direct-buy{min-height:94px!important}}
+</style>
 </head>
 <body>
 <div id="simuplcBootScreen" aria-label="Cargando SimuPLC">
@@ -17410,8 +17446,24 @@ document.addEventListener("DOMContentLoaded",function(){
   const dialog=document.createElement("dialog");
   dialog.id="simuplcProFeaturesDialog";
   dialog.setAttribute("aria-label","Todas las funciones SimuPLC PRO");
-  dialog.innerHTML='<button type="button" class="simuplc-features-close" aria-label="Cerrar funciones">✕ Cerrar</button><h3>Funciones incluidas en SimuPLC PRO</h3>';
-  dialog.appendChild(source.cloneNode(true));
+  dialog.innerHTML='<button type="button" class="simuplc-features-close" aria-label="Cerrar funciones">✕ Cerrar</button><h3>Todo lo que incluye SimuPLC PRO</h3><p class="simuplc-features-subtitle">Herramientas para diseñar, programar, simular y documentar tus proyectos eléctricos y de automatización.</p>';
+  const sections=[
+    {title:"Programación PLC",icon:"🧩",items:["Programación y simulación avanzada en Ladder y FBD","Módulos de ampliación LOGO!","Entradas y salidas analógicas","Temporizadores configurables"]},
+    {title:"Control y potencia",icon:"⚡",items:["Variadores de frecuencia (VFD)","Modo Técnico y Protecciones","Banco de condensadores y mejora del factor de potencia","Transformadores de alta a baja tensión"]},
+    {title:"HMI y proyectos",icon:"🖥️",items:["Procesos HMI avanzados sin las limitaciones de FREE","Guardar y exportar el proyecto completo","Exportar PDF con cajetín editable y sin marca"]},
+    {title:"Actualizaciones",icon:"✨",items:["Nuevas funciones y actualizaciones PRO incluidas"]}
+  ];
+  const content=document.createElement("div");
+  content.className="simuplc-features-grid";
+  sections.forEach(function(section){
+    const card=document.createElement("section");card.className="simuplc-feature-section";
+    const title=document.createElement("h4");title.textContent=section.icon+" "+section.title;card.appendChild(title);
+    const ul=document.createElement("ul");
+    section.items.forEach(function(item){const li=document.createElement("li");li.textContent=item;ul.appendChild(li);});
+    card.appendChild(ul);content.appendChild(card);
+  });
+  dialog.appendChild(content);
+  const footer=document.createElement("p");footer.className="simuplc-features-footer";footer.textContent="Licencia directa multiplataforma: PC + Android, hasta 3 dispositivos.";dialog.appendChild(footer);
   document.body.appendChild(dialog);
   trigger.addEventListener("click",function(){if(typeof dialog.showModal==="function")dialog.showModal();else dialog.setAttribute("open","");});
   dialog.querySelector(".simuplc-features-close").addEventListener("click",function(){if(typeof dialog.close==="function")dialog.close();else dialog.removeAttribute("open");});
