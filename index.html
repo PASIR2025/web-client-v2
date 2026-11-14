@@ -4415,7 +4415,14 @@ if (installBtn) {
 if ('serviceWorker' in navigator && !window.__logicsoftSwRegistered) {
   window.__logicsoftSwRegistered = true;
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(console.error);
+    navigator.serviceWorker.register('./service-worker.js', { scope: './', updateViaCache: 'none' })
+      .then((registration) => {
+        // Comprobar actualizaciones sin borrar localStorage, IndexedDB ni proyectos.
+        registration.update().catch(() => {});
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) registration.update().catch(() => {});
+        });
+      }).catch(console.error);
   });
 }
 
