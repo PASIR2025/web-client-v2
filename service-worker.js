@@ -1,5 +1,5 @@
 /* SimuPLC V16 - Service Worker offline-first. */
-const CACHE_NAME = 'simuplc-web-v27-arduino-uno-pc';
+const CACHE_NAME = 'simuplc-web-v28-android-update-fix';
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -86,7 +86,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.map((key) => key === CACHE_NAME ? Promise.resolve() : caches.delete(key))))
+      .then((keys) => Promise.all(keys.map((key) => (key === CACHE_NAME || !key.startsWith('simuplc-web-')) ? Promise.resolve() : caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -138,6 +138,8 @@ self.addEventListener('fetch', (event) => {
   }
 
   const isNavigation = request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
-  const programmerScript = /\/assets\/js\/(?:arduino-uno-programmer-v1\.js|codegen\/mcu-codegen-controller\.js)$/.test(url.pathname);
-  event.respondWith((isNavigation || programmerScript) ? networkFirst(request, url) : cacheFirst(request, url));
+  // Todo JavaScript y CSS de la app consulta primero la red. Así los nuevos modales
+  // y compiladores no quedan congelados en la caché de una instalación anterior.
+  const isAppCode = /\.(?:js|css)$/i.test(url.pathname);
+  event.respondWith((isNavigation || isAppCode) ? networkFirst(request, url) : cacheFirst(request, url));
 });
