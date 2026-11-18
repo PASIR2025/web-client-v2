@@ -6442,6 +6442,10 @@ body.simuplc-ladder-pdf #simuplcLadderPdfBrand{display:block!important;position:
 
 })();
 </script>\n
+<style id="simuplc-pc-ladder-pro-cta-unified">
+#ladderPremiumBtn{background:linear-gradient(135deg,#38bdf8,#0284c7)!important;color:#ffffff!important;border:1px solid #7dd3fc!important;font-weight:900!important;box-shadow:0 7px 22px rgba(2,132,199,.32)!important;white-space:nowrap!important}
+#ladderPremiumBtn::before{content:'👑 ';white-space:pre}
+</style>
 </body>
 </html>
 
@@ -10107,7 +10111,7 @@ body.simuplc-ladder-pdf #simuplcLadderPdfBrand{display:block!important;position:
     var btn = document.createElement('button');
     btn.id = 'ladderPremiumBtn';
     btn.type = 'button';
-    btn.textContent = 'ACTIVA FUNCIONES';
+    btn.textContent = 'Desbloquear PRO';
     document.body.appendChild(btn);
 
     function open(ev){
@@ -10121,7 +10125,7 @@ body.simuplc-ladder-pdf #simuplcLadderPdfBrand{display:block!important;position:
         if(window.parent && window.parent !== window){
           window.parent.postMessage({type:'SIMUPLC_OPEN_PREMIUM'}, '*');
         }else{
-          alert('Activa Premium desde el botón ACTIVA FUNCIONES de SimuPLC.');
+          alert('Activa Premium desde el botón Desbloquear PRO de SimuPLC.');
         }
       }catch(e){
         alert('Activa Premium desde SimuPLC.');
