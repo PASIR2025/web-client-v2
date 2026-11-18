@@ -4288,7 +4288,7 @@ body.mode-control #editorSelectBtn{display:none!important}
 </div>
 </div>
 </div>
-<button id="btnSoporte" class="btn-soporte">ACTIVA FUNCIONES</button>
+<button id="btnSoporte" class="btn-soporte">Desbloquear PRO</button>
 <div id="brand">SimuPLC Lab</div>
 <button id="installBtn">Instalar SimuPLC Lab</button>
 <button id="fabPalette">🧩 Bloques</button>
@@ -12836,7 +12836,7 @@ body.full-mode #btnSoporte{ display:none !important; }
       btn.classList.add('premium-active');
     }else{
       btn.style.display = '';
-      btn.textContent = 'ACTIVA FUNCIONES';
+      btn.textContent = 'Desbloquear PRO';
       btn.classList.remove('premium-active');
     }
   }
@@ -12913,7 +12913,7 @@ body.full-mode #btnSoporte{ display:none !important; }
         btn.classList.add('premium-active');
       }else{
         btn.style.display = '';
-        btn.textContent = 'ACTIVA FUNCIONES';
+        btn.textContent = 'Desbloquear PRO';
         btn.classList.remove('premium-active');
       }
     }
@@ -18792,7 +18792,7 @@ body.mode-ladder:not(.modular-external-editor) #topbar{display:flex!important}
           btn.classList.add('premium-active');
         }else{
           btn.style.display = '';
-          btn.textContent = 'ACTIVA FUNCIONES';
+          btn.textContent = 'Desbloquear PRO';
           btn.classList.remove('premium-active');
         }
       }
@@ -18829,7 +18829,7 @@ body.mode-ladder:not(.modular-external-editor) #topbar{display:flex!important}
   }
 
   /* Esta función reemplaza las anteriores:
-     solo abre cuando viene del botón ACTIVA FUNCIONES o desde Ladder con permiso. */
+     solo abre cuando viene del botón Desbloquear PRO o desde Ladder con permiso. */
   window.simuplcOpenPremiumOverlay = function(){
     if(Date.now() <= allowOpenUntil || window.__SIMUPLC_ALLOW_PREMIUM_OPEN === true){
       window.__SIMUPLC_ALLOW_PREMIUM_OPEN = false;
@@ -23199,6 +23199,39 @@ function checkNotice(){try{const d=snapshot(), serialized=JSON.stringify(d);if(!
 function startNotice(){setTimeout(checkNotice,1800);setInterval(checkNotice,1800);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startNotice,{once:true});else startNotice();
 
+})();
+</script>
+<style id="simuplc-pro-cta-unified-v2">
+#btnSoporte{background:linear-gradient(135deg,#38bdf8,#0284c7)!important;color:#ffffff!important;border:1px solid #7dd3fc!important;font-weight:900!important;box-shadow:0 7px 22px rgba(2,132,199,.32)!important;white-space:nowrap!important}
+#btnSoporte::before{content:'👑 ';white-space:pre}
+body.mode-hmi #hmiProUnlockBtn{display:flex!important}
+#hmiProUnlockBtn{display:none;position:absolute;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:530;align-items:center;justify-content:center;min-height:46px;padding:0 14px;border:1px solid #7dd3fc;border-radius:999px;background:linear-gradient(135deg,#38bdf8,#0284c7);color:#ffffff;font:900 13px Arial,sans-serif;box-shadow:0 7px 22px rgba(2,132,199,.32);white-space:nowrap;cursor:pointer}
+#hmiProUnlockBtn::before{content:'👑 ';white-space:pre}
+body.full-mode #hmiProUnlockBtn{display:none!important}
+body.mode-ladder #btnSoporte{display:none!important}
+body.full-mode.mode-hmi #hmiProUnlockBtn,body.clean-sim-mode #hmiProUnlockBtn{display:none!important}
+</style>
+<script id="simuplc-hmi-pro-cta-v2">
+(function(){
+function init(){
+ var shell=document.querySelector('#hmiHost .hmi-app-shell');
+ if(!shell||document.getElementById('hmiProUnlockBtn'))return;
+ var btn=document.createElement('button');
+ btn.id='hmiProUnlockBtn';btn.type='button';btn.textContent='Desbloquear PRO';
+ btn.addEventListener('click',function(ev){
+   ev.preventDefault();ev.stopPropagation();
+   var original=document.getElementById('btnSoporte');
+   if(original)original.click();
+ });
+ shell.appendChild(btn);
+ function sync(){
+  var full=false;
+  try{full=localStorage.getItem('logicsoft_full_v1')==='1'||document.body.classList.contains('full-mode')}catch(_){full=document.body.classList.contains('full-mode')}
+  btn.style.setProperty('display',full?'none':'','important');
+ }
+ sync();window.addEventListener('simuplc-license-changed',sync);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
 </body>
